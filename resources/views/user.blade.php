@@ -166,9 +166,9 @@ function confirmDelete() {
         <label class="form-label">Department</label>
         <!-- <select name="department" class="form-control">
           <option value="">Select department</option>
-          <option value="IT" {{ $data->department == 'IT' ? 'selected' : '' }}>IT</option>
-          <option value="HR" {{ $data->department == 'HR' ? 'selected' : '' }}>HR</option>
-          <option value="Finance" {{ $data->department == 'Finance' ? 'selected' : '' }}>Finance</option>
+          <option value="IT">IT</option>
+          <option value="HR">HR</option>
+          <option value="Finance">Finance</option>
         </select> -->
       </div>
       <button type="submit" class="btn btn-success w-100">Register</button>
