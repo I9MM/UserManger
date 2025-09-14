@@ -82,12 +82,13 @@
       <!-- Department -->
       <div class="mb-3 text-start">
         <label class="form-label">Department</label>
-        <!-- <select name="department" class="form-control">
-          <option value="">Select department</option>
-          <option value="IT" {{ $finduser->department == 'IT' ? 'selected' : '' }}>IT</option>
-          <option value="HR" {{ $finduser->department == 'HR' ? 'selected' : '' }}>HR</option>
-          <option value="Finance" {{ $finduser->department == 'Finance' ? 'selected' : '' }}>Finance</option>
-        </select> -->
+<select name="department" class="form-control">
+  <option value="none">Select department</option>
+  <option value="IT" {{ $finduser->department == 'IT' ? 'selected' : '' }}>IT</option>
+  <option value="HR" {{ $finduser->department == 'HR' ? 'selected' : '' }}>HR</option>
+  <option value="CS" {{ $finduser->department == 'CS' ? 'selected' : '' }}>CS</option>
+  <option value="BS" {{ $finduser->department == 'BS' ? 'selected' : '' }}>BS</option>
+</select>
       </div>
 
       <div class="d-flex justify-content-between mt-4">

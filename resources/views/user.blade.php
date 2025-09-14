@@ -85,6 +85,7 @@
             <th>Photo</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Dep</th>
             <th width="220">Actions</th>
           </tr>
         </thead>
@@ -97,6 +98,7 @@
             </td>
             <td>{{ $data->name }}</td>
             <td>{{ $data->email }}</td>
+            <td>{{ $data->department }}</td>
             <td>
               <a href="/admin/{{$data->id}}/show" class="btn btn-outline-primary btn-sm">Show</a>
               <a href="/admin/{{$data->id}}/edit" class="btn btn-outline-warning btn-sm">Edit</a>
@@ -162,15 +164,16 @@ function confirmDelete() {
         <!-- <input type="file" class="form-control" name="image" accept="image/*"> -->
       </div>
             <!-- Department -->
-      <div class="mb-3 text-start">
-        <label class="form-label">Department</label>
-        <!-- <select name="department" class="form-control">
-          <option value="">Select department</option>
-          <option value="IT" {{ $data->department == 'IT' ? 'selected' : '' }}>IT</option>
-          <option value="HR" {{ $data->department == 'HR' ? 'selected' : '' }}>HR</option>
-          <option value="Finance" {{ $data->department == 'Finance' ? 'selected' : '' }}>Finance</option>
-        </select> -->
-      </div>
+      <div class="mb-3">
+    <label class="form-label">Department</label>
+    <select name="department" class="form-control">
+      <option value="none">Select department</option>
+      <option value="IT">IT</option>
+      <option value="HR">HR</option>
+      <option value="CS">CS</option>
+      <option value="BS">BS</option>
+    </select>
+</div>
       <button type="submit" class="btn btn-success w-100">Register</button>
     </form>
   </div>

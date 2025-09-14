@@ -8,7 +8,7 @@ use App\Models\User;
 
 class Crud extends Controller
 {
-    public $col = ['name','email'];
+    public $col = ['name','email','department'];
     public function index()
     {
         $user = User::all();
@@ -38,7 +38,7 @@ User::create(array_merge(
     // $user->email = $request->email;
     //$user->password = bcrypt('123456');
         // $user->save();
-        return redirect()->route('admin.create');
+    return redirect()->route('admin.create')->with('success', 'User Created successfully!');
     }
 
     /**
