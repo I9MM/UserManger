@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Validation\Rule;
+
 
 class Crud extends Controller
 {
@@ -27,19 +29,23 @@ class Crud extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-User::create(array_merge(
-    $request->only($this->col),
-    ['password' => bcrypt($request->password)]
-));        //dd($request->name,$request->email);
-    // $user = new User();
-    // $user->name  = $request->name;
-    // $user->email = $request->email;
-    //$user->password = bcrypt('123456');
-        // $user->save();
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'name'  => 'required|string',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:6',
+        'department' => 'required|string|in:IT,HR,CS,BS'
+    ]);
+
+    User::create(array_merge(
+        $request->only($this->col),
+        ['password' => bcrypt($request->password)]
+    ));
+
     return redirect()->route('admin.create')->with('success', 'User Created successfully!');
-    }
+}
+
 
     /**
      * Display the specified resource.
@@ -67,6 +73,16 @@ public function update(Request $request, string $id)
 //User::where('id',$id)->update($request->only($this->col));
     $user = User::findOrFail($id);
     $data = $request->only($this->col);
+        $validated = $request->validate([
+        'name'  => 'required|string',
+    'email' => [
+        'required',
+        'email',
+        Rule::unique('users', 'email')->ignore($id),
+    ],        
+    'password' => 'nullable|string|min:6',
+        'department' => 'required|string|in:IT,HR,CS,BS'
+    ]);
     if ($request->filled('password')) {
         $data['password'] = bcrypt($request->password);
     }

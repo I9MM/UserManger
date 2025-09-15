@@ -61,16 +61,25 @@
       <div class="mb-3 text-start">
         <label class="form-label">Name</label>
         <input type="text" class="form-control" name="name" value="{{ $finduser->name }}" required>
+          @error('name')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
       </div>
 
       <div class="mb-3 text-start">
         <label class="form-label">Email</label>
         <input type="email" class="form-control" name="email" value="{{ $finduser->email }}" required>
+          @error('email')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
       </div>
 
       <div class="mb-3 text-start">
         <label class="form-label">Password <small class="text-muted">(leave empty if not changing)</small></label>
         <input type="password" class="form-control" name="password" placeholder="New password">
+          @error('password')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
       </div>
 
       <!-- Image Upload -->
@@ -89,7 +98,10 @@
   <option value="CS" {{ $finduser->department == 'CS' ? 'selected' : '' }}>CS</option>
   <option value="BS" {{ $finduser->department == 'BS' ? 'selected' : '' }}>BS</option>
 </select>
-      </div>
+          @error('department')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
+</div>
 
       <div class="d-flex justify-content-between mt-4">
         <a href="{{ route('admin.create') }}" class="btn btn-secondary w-45">Cancel</a>

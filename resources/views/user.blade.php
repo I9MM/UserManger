@@ -86,6 +86,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Dep</th>
+            <th>INFO</th>
             <th width="220">Actions</th>
           </tr>
         </thead>
@@ -100,6 +101,9 @@
             <td>{{ $data->email }}</td>
             <td>{{ $data->department }}</td>
             <td>
+              {{ $data->CreatedAt }} 
+            </td>
+            <td>
               <a href="/admin/{{$data->id}}/show" class="btn btn-outline-primary btn-sm">Show</a>
               <a href="/admin/{{$data->id}}/edit" class="btn btn-outline-warning btn-sm">Edit</a>
 <form id="delete-form" method="POST" action="{{ route('admin.destroy', $data->id) }}" style="display:inline;">
@@ -109,6 +113,8 @@
         Delete
     </button>
 </form>
+              <a href="" class="btn btn-outline-dark btn-sm">INFO</a>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 <script>
@@ -141,39 +147,47 @@ function confirmDelete() {
   <div class="card">
     <h3 class="text-center text-success mb-4">Register New User</h3>
 
-    <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data" novalidate>
       @csrf
-      <div class="mb-3">
-        <label class="form-label">Full Name</label>
-        <input type="text" class="form-control" name="name" placeholder="Enter full name" required>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-control" name="email" placeholder="Enter email" required>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" class="form-control" name="pass" placeholder="Enter password" required>
-      </div>
-
-      <!-- Upload Image -->
-      <div class="mb-3">
-        <label class="form-label">Photo</label>
-        <!-- <input type="file" class="form-control" name="image" accept="image/*"> -->
-      </div>
-            <!-- Department -->
-      <div class="mb-3">
-    <label class="form-label">Department</label>
-    <select name="department" class="form-control">
-      <option value="none">Select department</option>
-      <option value="IT">IT</option>
-      <option value="HR">HR</option>
-      <option value="CS">CS</option>
-      <option value="BS">BS</option>
-    </select>
+<div class="mb-3">
+    <label class="form-label">Full Name</label>
+    <input type="text" class="form-control" name="name" placeholder="Enter full name" value='{{old('name')}}' required>
+    @error('name')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
 </div>
+
+<div class="mb-3">
+    <label class="form-label">Email Address</label>
+    <input type="email" class="form-control" name="email" placeholder="Enter email" value='{{old('email')}}' required>
+    @error('email')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" name="pass" placeholder="Enter password"  value='{{old('pass')}}' required>
+    @error('pass')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Department</label>
+<select name="department" class="form-control">
+  <option value="none" {{ old('department') == 'none' ? 'selected' : '' }}>Select department</option>
+  <option value="IT" {{ old('department') == 'IT' ? 'selected' : '' }}>IT</option>
+  <option value="HR" {{ old('department') == 'HR' ? 'selected' : '' }}>HR</option>
+  <option value="CS" {{ old('department') == 'CS' ? 'selected' : '' }}>CS</option>
+  <option value="BS" {{ old('department') == 'BS' ? 'selected' : '' }}>BS</option>
+</select>
+
+    @error('department')
+        <div class="text-danger small">{{ $message }}</div>
+    @enderror
+</div>
+
       <button type="submit" class="btn btn-success w-100">Register</button>
     </form>
   </div>
